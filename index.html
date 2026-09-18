@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Student Expense & Budget Tracker - Claymorphic Edition</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==== 3D LANDING PAGE ==== -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-bg-decorations">
+            <div class="clay-blob blob-1"></div>
+            <div class="clay-blob blob-2"></div>
+        </div>
+
+        <nav class="landing-nav">
+            <div class="logo-container">
+                <div class="clay-icon logo-icon">💰</div>
+                <div class="logo-text">
+                    <h2>SmartSpend</h2>
+                    <span class="badge-student">Claymorphic 3D</span>
+                </div>
+            </div>
+            <div class="landing-nav-actions">
+                <button id="landingThemeBtn" class="clay-btn mini-btn">🌙 Dark</button>
+                <button id="landingLoginNavBtn" class="clay-btn primary-btn">Login</button>
+            </div>
+        </nav>
+
+        <header class="landing-hero">
+            <div class="hero-content">
+                <span class="hero-tag">✨ Minimalist Student Finance</span>
+                <h1 class="hero-title">Track Budget & Expenses with <span class="text-gradient">Real-Time Insights</span></h1>
+                <p class="hero-desc">An intelligent personal finance platform designed specifically for students. Secure user login, real-time expense analytics, and 3D claymorphic UI.</p>
+                
+                <div class="hero-cta-group">
+                    <button id="heroGetStartedBtn" class="clay-btn cta-btn green-clay">Get Started Free</button>
+                    <button id="heroLoginBtn" class="clay-btn cta-btn purple-clay">🔑 Login Account</button>
+                </div>
+            </div>
+
+            <!-- 3D Animated Stage -->
+            <div class="hero-3d-stage">
+                <div class="clay-card-3d main-card-3d">
+                    <div class="card-3d-header">
+                        <span>Student Wallet</span>
+                        <span class="chip-3d">PRO</span>
+                    </div>
+                    <div class="card-3d-balance" id="heroCardBalance">₹0.00</div>
+                    <div class="card-3d-footer">
+                        <span>Real-Time Analytics</span>
+                        <span>BCA Project</span>
+                    </div>
+                </div>
+
+                <div class="floating-3d float-element-1">
+                    <span class="float-icon">💰</span>
+                    <span class="float-label">Income</span>
+                </div>
+
+                <div class="floating-3d float-element-2">
+                    <span class="float-icon">📊</span>
+                    <span class="float-label">Live Analytics</span>
+                </div>
+
+                <div class="floating-3d float-element-3">
+                    <span class="float-icon">🎯</span>
+                    <span class="float-label">Budget Guard</span>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- ==== AUTHENTICATION SCREEN (LOGIN / REGISTER) ==== -->
+    <div id="authScreen" class="auth-screen hidden">
+        <div class="auth-card clay-card">
+            <button id="authBackToLandingBtn" class="back-link-btn">← Back to Home</button>
+
+            <div class="auth-header">
+                <div class="clay-icon logo-icon large">💰</div>
+                <h2>SmartSpend Account</h2>
+                <p class="auth-subtitle">Login or register to record real expense data</p>
+            </div>
+
+            <!-- Auth Form Selector Tabs -->
+            <div class="auth-tabs clay-inset">
+                <button id="tabLoginBtn" class="auth-tab active">Login</button>
+                <button id="tabRegisterBtn" class="auth-tab">Register</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" class="auth-form active-form" novalidate>
+                <div class="form-group">
+                    <label for="loginEmail">Student Email / ID <span class="required">*</span></label>
+                    <input type="email" id="loginEmail" class="clay-input" placeholder="e.g. student@bca.edu" required>
+                    <span class="error-msg" id="loginEmailError">Enter a valid student email.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password <span class="required">*</span></label>
+                    <input type="password" id="loginPassword" class="clay-input" placeholder="••••••••" required>
+                    <span class="error-msg" id="loginPasswordError">Please enter your password.</span>
+                </div>
+
+                <button type="submit" class="clay-btn primary-btn full-width-btn green-clay">Login to Dashboard</button>
+
+                <!-- Quick Demo Login Button for Viva Testing -->
+                <button type="button" id="demoLoginBtn" class="clay-btn secondary-btn full-width-btn margin-top-sm">
+                    ⚡ Quick Demo Login (for Viva Test)
+                </button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="regName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="regName" class="clay-input" placeholder="e.g. Alex Smith" required>
+                    <span class="error-msg" id="regNameError">Name is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Student Email / ID <span class="required">*</span></label>
+                    <input type="email" id="regEmail" class="clay-input" placeholder="e.g. alex@bca.edu" required>
+                    <span class="error-msg" id="regEmailError">Valid student email is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Password <span class="required">*</span></label>
+                    <input type="password" id="regPassword" class="clay-input" placeholder="Minimum 4 characters" required>
+                    <span class="error-msg" id="regPasswordError">Password must be at least 4 characters.</span>
+                </div>
+
+                <button type="submit" class="clay-btn primary-btn full-width-btn purple-clay">Register Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==== MAIN APPLICATION CONTAINER ==== -->
+    <div class="app-container hidden" id="appMain">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar clay-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="clay-icon logo-icon">💰</div>
+                    <div class="logo-text">
+                        <h2>SmartSpend</h2>
+                        <span class="badge-student">Claymorphic</span>
+                    </div>
+                </div>
+                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Sidebar">✕</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-target="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#add-income" class="nav-link" data-target="add-income">
+                    <span class="nav-icon">💵</span>
+                    <span>Add Income</span>
+                </a>
+                <a href="#add-expense" class="nav-link" data-target="add-expense">
+                    <span class="nav-icon">💸</span>
+                    <span>Add Expense</span>
+                </a>
+                <a href="#budget" class="nav-link" data-target="budget">
+                    <span class="nav-icon">🎯</span>
+                    <span>Monthly Budget</span>
+                </a>
+                <a href="#history" class="nav-link" data-target="history">
+                    <span class="nav-icon">📜</span>
+                    <span>Transactions</span>
+                </a>
+                <a href="#analysis" class="nav-link" data-target="analysis">
+                    <span class="nav-icon">📈</span>
+                    <span>Expense Analysis</span>
+                </a>
+                <a href="#insights" class="nav-link" data-target="insights">
+                    <span class="nav-icon">💡</span>
+                    <span>Smart Suggestions</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-toggle-wrapper clay-inset">
+                    <span class="theme-label">Clay Theme</span>
+                    <button id="themeToggleBtn" class="clay-btn mini-btn">🌙 Dark</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navbar Header -->
+            <header class="top-header clay-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Sidebar Menu">☰</button>
+                    <div>
+                        <h1 id="pageTitle" class="page-title">Dashboard Overview</h1>
+                        <p class="page-subtitle" id="pageSubtitle">Real-time student expense tracker with claymorphic UI.</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="clay-btn primary-btn green-clay" id="quickAddExpenseBtn">+ Add Expense</button>
+
+                    <!-- User Profile & Logout -->
+                    <div class="user-profile clay-card-mini">
+                        <div class="avatar" id="userAvatar">🎓</div>
+                        <div class="user-info">
+                            <span class="user-name" id="displayUserName">Student</span>
+                            <span class="user-role" id="displayUserEmail">student@bca.edu</span>
+                        </div>
+                        <button id="logoutBtn" class="clay-btn icon-only-btn danger-clay" title="Logout Account">🚪</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Global Alert Banner for Budget Warnings -->
+            <div id="globalBudgetBanner" class="alert-banner hidden">
+                <div class="banner-icon" id="bannerIcon">⚠️</div>
+                <div class="banner-message" id="bannerMessage">You are nearing your budget limit!</div>
+                <button class="banner-close-btn" onclick="this.parentElement.classList.add('hidden')">&times;</button>
+            </div>
+
+            <!-- SECTIONS -->
+            <!-- 1. DASHBOARD SECTION -->
+            <section id="dashboard" class="content-section active">
+                <div class="metrics-grid">
+                    <div class="clay-card metric-card income-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Income</span>
+                            <div class="clay-icon green-icon">💰</div>
+                        </div>
+                        <div class="metric-value" id="dashTotalIncome">₹0.00</div>
+                        <div class="metric-footer green-text">Total real income logged</div>
+                    </div>
+
+                    <div class="clay-card metric-card expense-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Expenses</span>
+                            <div class="clay-icon red-icon">💸</div>
+                        </div>
+                        <div class="metric-value" id="dashTotalExpense">₹0.00</div>
+                        <div class="metric-footer red-text">Total real expenses logged</div>
+                    </div>
+
+                    <div class="clay-card metric-card balance-card">
+                        <div class="card-header">
+                            <span class="card-title">Available Balance</span>
+                            <div class="clay-icon blue-icon">💳</div>
+                        </div>
+                        <div class="metric-value" id="dashBalance">₹0.00</div>
+                        <div class="metric-footer" id="dashBalanceSubtext">Income minus expenses</div>
+                    </div>
+
+                    <div class="clay-card metric-card budget-card">
+                        <div class="card-header">
+                            <span class="card-title">Monthly Budget</span>
+                            <div class="clay-icon purple-icon">🎯</div>
+                        </div>
+                        <div class="metric-value" id="dashBudgetLimit">₹0.00</div>
+                        <div class="metric-footer purple-text" id="dashBudgetRemainingSub">Remaining: ₹0.00</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-middle-grid">
+                    <div class="clay-card budget-health-card">
+                        <div class="card-header">
+                            <h3>Budget Usage & Health</h3>
+                            <span class="clay-badge status-pill" id="dashBudgetStatusPill">Healthy</span>
+                        </div>
+                        <div class="budget-progress-container">
+                            <div class="budget-progress-info">
+                                <span>Spent: <strong id="dashBudgetSpent">₹0.00</strong></span>
+                                <span>Limit: <strong id="dashBudgetCap">₹0.00</strong></span>
+                            </div>
+                            <div class="progress-bar-track clay-inset">
+                                <div class="progress-bar-fill" id="dashProgressBar"></div>
+                            </div>
+                            <div class="budget-percentage-text">
+                                <span id="dashBudgetPercentText">0% Used</span>
+                                <span id="dashBudgetRemainingText">₹0.00 left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clay-card quick-insights-card">
+                        <div class="card-header">
+                            <h3>💡 Expense Analysis Trigger</h3>
+                        </div>
+                        <div class="quick-insight-content clay-inset" id="dashQuickInsight">
+                            <p class="insight-text">No expenses entered yet. Add your first real expense to generate live analysis!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom-grid">
+                    <div class="clay-card recent-activity-card">
+                        <div class="card-header">
+                            <h3>Recent Transactions</h3>
+                            <button class="btn-link" onclick="navigateToSection('history')">View All</button>
+                        </div>
+                        <div class="recent-list-container" id="dashRecentList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="clay-card category-overview-card">
+                        <div class="card-header">
+                            <h3>Expense Distribution</h3>
+                            <button class="btn-link" onclick="navigateToSection('analysis')">Detailed Analysis</button>
+                        </div>
+                        <div class="category-bars-container" id="dashCategoryBars">
+                            <!-- Dynamic horizontal progress bars -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. ADD INCOME SECTION -->
+            <section id="add-income" class="content-section">
+                <div class="form-container-wrapper">
+                    <div class="clay-card form-card">
+                        <div class="form-card-header">
+                            <div class="clay-icon green-icon large">💰</div>
+                            <div>
+                                <h2>Add Real Income</h2>
+                                <p>Record money received from pocket money, jobs, scholarships, or freelance work.</p>
+                            </div>
+                        </div>
+
+                        <form id="incomeForm" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="incomeAmount">Amount (₹) <span class="required">*</span></label>
+                                    <input type="number" id="incomeAmount" class="clay-input" step="0.01" min="0.01" placeholder="e.g. 5000" required>
+                                    <span class="error-msg" id="incomeAmountError">Please enter a valid positive amount.</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="incomeSource">Income Source <span class="required">*</span></label>
+                                    <select id="incomeSource" class="clay-input" required>
+                                        <option value="" disabled selected>Select Source</option>
+                                        <option value="Pocket Money">Pocket Money</option>
+                                        <option value="Scholarship">Scholarship</option>
+                                        <option value="Part-time Job">Part-time Job</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="error-msg" id="incomeSourceError">Please select an income source.</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="incomeDate">Date Received <span class="required">*</span></label>
+                                    <input type="date" id="incomeDate" class="clay-input" required>
+                                    <span class="error-msg" id="incomeDateError">Please pick a valid date.</span>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="incomeDesc">Description / Note</label>
+                                    <input type="text" id="incomeDesc" class="clay-input" placeholder="e.g. Allowance, bonus, salary">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="clay-btn secondary-btn" onclick="resetForm('incomeForm')">Clear</button>
+                                <button type="submit" class="clay-btn primary-btn green-clay">Save Real Income</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. ADD EXPENSE SECTION -->
+            <section id="add-expense" class="content-section">
+                <div class="form-container-wrapper">
+                    <div class="clay-card form-card">
+                        <div class="form-card-header">
+                            <div class="clay-icon red-icon large">💸</div>
+                            <div>
+                                <h2>Add Real Expense</h2>
+                                <p>Log daily student expenses to automatically trigger live smart suggestions!</p>
+                            </div>
+                        </div>
+
+                        <form id="expenseForm" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="expenseAmount">Amount (₹) <span class="required">*</span></label>
+                                    <input type="number" id="expenseAmount" class="clay-input" step="0.01" min="0.01" placeholder="e.g. 250" required>
+                                    <span class="error-msg" id="expenseAmountError">Please enter a valid positive amount.</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expenseCategory">Expense Category <span class="required">*</span></label>
+                                    <select id="expenseCategory" class="clay-input" required>
+                                        <option value="" disabled selected>Select Category</option>
+                                        <option value="Food">Food (Canteen / Groceries)</option>
+                                        <option value="Transport">Transport (Bus / Auto / Petrol)</option>
+                                        <option value="Education">Education (Books / College Fees)</option>
+                                        <option value="Shopping">Shopping (Clothes / Gear)</option>
+                                        <option value="Entertainment">Entertainment (Movies / Outings)</option>
+                                        <option value="Health">Health & Fitness</option>
+                                        <option value="Bills">Bills & Recharge (Mobile / Wifi)</option>
+                                        <option value="Other">Other Miscellaneous</option>
+                                    </select>
+                                    <span class="error-msg" id="expenseCategoryError">Please select an expense category.</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expenseDate">Expense Date <span class="required">*</span></label>
+                                    <input type="date" id="expenseDate" class="clay-input" required>
+                                    <span class="error-msg" id="expenseDateError">Please pick a valid date.</span>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="expenseDesc">Description / Note</label>
+                                    <input type="text" id="expenseDesc" class="clay-input" placeholder="e.g. Canteen snacks, mess fee, bus pass">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="clay-btn secondary-btn" onclick="resetForm('expenseForm')">Clear</button>
+                                <button type="submit" class="clay-btn primary-btn red-clay">Save Expense & Trigger Analysis</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. MONTHLY BUDGET SECTION -->
+            <section id="budget" class="content-section">
+                <div class="budget-section-grid">
+                    <div class="clay-card form-card">
+                        <div class="form-card-header">
+                            <div class="clay-icon purple-icon large">🎯</div>
+                            <div>
+                                <h2>Set Monthly Budget</h2>
+                                <p>Configure your monthly limit to receive alerts when adding real expenses.</p>
+                            </div>
+                        </div>
+
+                        <form id="budgetForm" novalidate>
+                            <div class="form-group">
+                                <label for="budgetAmount">Monthly Budget Goal (₹) <span class="required">*</span></label>
+                                <input type="number" id="budgetAmount" class="clay-input" step="1" min="1" placeholder="e.g. 10000" required>
+                                <span class="error-msg" id="budgetAmountError">Please enter a valid budget limit.</span>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="clay-btn primary-btn purple-clay">Save Budget Limit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="clay-card budget-summary-detail-card">
+                        <h3>Budget Status</h3>
+                        <div class="budget-stats-list">
+                            <div class="b-stat">
+                                <span class="b-label">Configured Limit</span>
+                                <span class="b-value" id="bStatLimit">₹0.00</span>
+                            </div>
+                            <div class="b-stat">
+                                <span class="b-label">Total Real Spent</span>
+                                <span class="b-value red-text" id="bStatSpent">₹0.00</span>
+                            </div>
+                            <div class="b-stat">
+                                <span class="b-label">Budget Remaining</span>
+                                <span class="b-value green-text" id="bStatRemaining">₹0.00</span>
+                            </div>
+                            <div class="b-stat">
+                                <span class="b-label">Usage Percentage</span>
+                                <span class="b-value" id="bStatPercent">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="budget-big-progress">
+                            <div class="progress-bar-track large clay-inset">
+                                <div class="progress-bar-fill" id="bStatProgressBar"></div>
+                            </div>
+                        </div>
+
+                        <div id="budgetAlertBox" class="budget-alert-box alert-neutral clay-inset">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-text" id="budgetAlertText">Set a budget limit to monitor real-time usage.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. TRANSACTION HISTORY SECTION -->
+            <section id="history" class="content-section">
+                <div class="clay-card table-card">
+                    <div class="table-controls-header">
+                        <div class="search-box">
+                            <input type="text" id="searchInput" class="clay-input" placeholder="🔍 Search real transactions...">
+                        </div>
+
+                        <div class="filter-controls">
+                            <select id="filterType" class="clay-input">
+                                <option value="ALL">All Types</option>
+                                <option value="INCOME">Income Only</option>
+                                <option value="EXPENSE">Expense Only</option>
+                            </select>
+
+                            <select id="filterCategory" class="clay-input">
+                                <option value="ALL">All Categories</option>
+                            </select>
+
+                            <select id="sortBy" class="clay-input">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="amount-desc">Highest Amount</option>
+                                <option value="amount-asc">Lowest Amount</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Category / Source</th>
+                                    <th>Description</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="emptyState" class="empty-state hidden">
+                        <div class="empty-icon">📂</div>
+                        <h3>No Real Transactions Found</h3>
+                        <p>You haven't logged any transactions yet. Add an expense or income to populate history!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. EXPENSE ANALYSIS SECTION -->
+            <section id="analysis" class="content-section">
+                <div class="analysis-metrics-grid">
+                    <div class="clay-card a-metric-card">
+                        <span class="a-label">Highest Expense Category</span>
+                        <div class="a-val" id="anTopCategory">-</div>
+                        <span class="a-sub" id="anTopCategoryAmount">₹0.00 spent</span>
+                    </div>
+
+                    <div class="clay-card a-metric-card">
+                        <span class="a-label">Average Daily Spend</span>
+                        <div class="a-val" id="anAvgDaily">₹0.00</div>
+                        <span class="a-sub">Based on current month days</span>
+                    </div>
+
+                    <div class="clay-card a-metric-card">
+                        <span class="a-label">Real Transactions</span>
+                        <div class="a-val" id="anTotalCount">0</div>
+                        <span class="a-sub" id="anIncExpCount">0 Incomes | 0 Expenses</span>
+                    </div>
+
+                    <div class="clay-card a-metric-card">
+                        <span class="a-label">Highest Single Expense</span>
+                        <div class="a-val" id="anMaxExpense">₹0.00</div>
+                        <span class="a-sub" id="anMaxExpenseName">-</span>
+                    </div>
+                </div>
+
+                <div class="analysis-visuals-grid">
+                    <div class="clay-card visual-card">
+                        <div class="card-header">
+                            <h3>Category Spending Breakdown</h3>
+                            <span class="clay-badge">Real Data Bars</span>
+                        </div>
+                        <div class="visual-chart-container" id="anCategoryBarsContainer">
+                            <!-- Custom visual chart bars -->
+                        </div>
+                    </div>
+
+                    <div class="clay-card visual-card">
+                        <div class="card-header">
+                            <h3>Income vs Expense Ratio</h3>
+                            <span class="clay-badge">Ratio Bar</span>
+                        </div>
+                        <div class="ratio-chart-container">
+                            <div class="ratio-labels">
+                                <span class="green-text">Income: <strong id="ratioIncText">₹0.00</strong></span>
+                                <span class="red-text">Expense: <strong id="ratioExpText">₹0.00</strong></span>
+                            </div>
+                            <div class="stacked-bar-track clay-inset">
+                                <div class="stacked-bar-fill green-fill" id="ratioIncBar" style="width: 50%;"></div>
+                                <div class="stacked-bar-fill red-fill" id="ratioExpBar" style="width: 50%;"></div>
+                            </div>
+                            <div class="ratio-footer">
+                                <span id="ratioSavingsText">Savings Rate: 0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. SMART INSIGHTS SECTION -->
+            <section id="insights" class="content-section">
+                <div class="insights-container">
+                    <div class="insights-header-banner clay-card">
+                        <div class="insights-logo clay-icon purple-icon large">🤖</div>
+                        <div>
+                            <h2>Real-Time Event Suggestions</h2>
+                            <p>Calculated strictly whenever real expenses are entered into your tracker.</p>
+                        </div>
+                    </div>
+
+                    <div class="insights-cards-grid" id="smartInsightsGrid">
+                        <!-- Dynamic event-driven suggestions -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal for Deletion -->
+    <div id="deleteModal" class="modal-backdrop hidden">
+        <div class="modal-card clay-card">
+            <div class="modal-icon warning">🗑️</div>
+            <h3>Delete Transaction?</h3>
+            <p>Are you sure you want to delete this real transaction record?</p>
+            <div class="modal-actions">
+                <button class="clay-btn secondary-btn" id="cancelDeleteBtn">Cancel</button>
+                <button class="clay-btn danger-btn danger-clay" id="confirmDeleteBtn">Delete Record</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

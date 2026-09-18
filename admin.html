@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - System Management</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ==== ADMIN AUTHENTICATION SCREEN ==== -->
+    <div id="adminAuthScreen" class="auth-screen">
+        <div class="auth-card clay-card">
+            <div class="auth-header">
+                <div class="clay-icon logo-icon large purple-icon">🛡️</div>
+                <h2>Administrator Access</h2>
+                <p class="auth-subtitle">Login to inspect and manage user database records</p>
+            </div>
+
+            <form id="adminLoginForm" class="auth-form active-form" novalidate>
+                <div class="form-group">
+                    <label for="adminEmail">Admin Username / Email <span class="required">*</span></label>
+                    <input type="email" id="adminEmail" class="clay-input" value="admin@bca.edu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password <span class="required">*</span></label>
+                    <input type="password" id="adminPassword" class="clay-input" value="vlbjcas" required>
+                </div>
+
+                <button type="submit" class="clay-btn primary-btn full-width-btn purple-clay">Login to Admin Portal</button>
+                
+                <button type="button" id="adminQuickLoginBtn" class="clay-btn secondary-btn full-width-btn margin-top-sm">
+                    ⚡ Quick Admin Login (admin@bca.edu / vlbjcas)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==== MAIN ADMIN DASHBOARD CONTAINER ==== -->
+    <div class="app-container hidden" id="adminMainApp">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar clay-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="clay-icon logo-icon purple-icon">🛡️</div>
+                    <div class="logo-text">
+                        <h2>AdminPanel</h2>
+                        <span class="badge-student">System Manager</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-link active" data-target="overview">
+                    <span class="nav-icon">📊</span>
+                    <span>DB Overview</span>
+                </a>
+                <a href="#users" class="nav-link" data-target="users">
+                    <span class="nav-icon">👥</span>
+                    <span>User Database</span>
+                </a>
+                <a href="#system" class="nav-link" data-target="system">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Database Backup</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-toggle-wrapper clay-inset">
+                    <span class="theme-label">Clay Theme</span>
+                    <button id="adminThemeToggleBtn" class="clay-btn mini-btn">🌙 Dark</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navbar Header -->
+            <header class="top-header clay-header">
+                <div class="header-left">
+                    <div>
+                        <h1 id="adminPageTitle" class="page-title">Database Management</h1>
+                        <p class="page-subtitle" id="adminPageSubtitle">Real-time inspection of student accounts & transaction tables.</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="user-profile clay-card-mini">
+                        <div class="avatar">🛡️</div>
+                        <div class="user-info">
+                            <span class="user-name">System Admin</span>
+                            <span class="user-role">admin@bca.edu</span>
+                        </div>
+                        <button id="adminLogoutBtn" class="clay-btn icon-only-btn danger-clay" title="Logout Admin">🚪</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 1. OVERVIEW SECTION -->
+            <section id="overview" class="content-section active">
+                <div class="metrics-grid">
+                    <div class="clay-card metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Registered Students</span>
+                            <div class="clay-icon purple-icon">👥</div>
+                        </div>
+                        <div class="metric-value" id="statTotalUsers">0</div>
+                        <div class="metric-footer purple-text">Total accounts in `users` DB</div>
+                    </div>
+
+                    <div class="clay-card metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Incomes Logged</span>
+                            <div class="clay-icon green-icon">💰</div>
+                        </div>
+                        <div class="metric-value" id="statTotalIncome">₹0.00</div>
+                        <div class="metric-footer green-text">Across all student accounts</div>
+                    </div>
+
+                    <div class="clay-card metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Expenses Logged</span>
+                            <div class="clay-icon red-icon">💸</div>
+                        </div>
+                        <div class="metric-value" id="statTotalExpense">₹0.00</div>
+                        <div class="metric-footer red-text">Across all student accounts</div>
+                    </div>
+
+                    <div class="clay-card metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Transactions DB</span>
+                            <div class="clay-icon blue-icon">📜</div>
+                        </div>
+                        <div class="metric-value" id="statTotalTxCount">0</div>
+                        <div class="metric-footer blue-text">Total transaction rows</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom-grid" style="grid-template-columns: 1fr;">
+                    <div class="clay-card">
+                        <div class="card-header">
+                            <h3>⚡ Quick Database Activity Log</h3>
+                            <button class="btn-link" onclick="adminNavigateToSection('users')">Manage All Users</button>
+                        </div>
+                        <div class="recent-list-container" id="adminRecentActivity">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. USER DATABASE TABLE SECTION -->
+            <section id="users" class="content-section">
+                <div class="clay-card table-card">
+                    <div class="table-controls-header">
+                        <div class="search-box">
+                            <input type="text" id="adminUserSearch" class="clay-input" placeholder="🔍 Search registered students by name or email...">
+                        </div>
+
+                        <div class="filter-controls">
+                            <button id="adminAddDemoUserBtn" class="clay-btn primary-btn green-clay">+ Add Test Student</button>
+                            <button id="adminRefreshUsersBtn" class="clay-btn mini-btn">🔄 Refresh Data</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Full Name</th>
+                                    <th>Student Email / ID</th>
+                                    <th>Password</th>
+                                    <th>Registration Date</th>
+                                    <th class="text-center">Stored Records</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUserTableBody">
+                                <!-- Dynamic User Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. DATABASE BACKUP & TOOLS -->
+            <section id="system" class="content-section">
+                <div class="budget-section-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="clay-card form-card">
+                        <div class="form-card-header">
+                            <div class="clay-icon purple-icon large">💾</div>
+                            <div>
+                                <h2>Database Export & Backup</h2>
+                                <p>Export real-time user database JSON or download SQL script.</p>
+                            </div>
+                        </div>
+                        <div class="form-actions" style="border: none; margin: 0; padding: 0; flex-direction: column; gap: 12px; align-items: stretch;">
+                            <button id="exportJsonDbBtn" class="clay-btn primary-btn purple-clay">📥 Download JSON Database Backup</button>
+                            <a href="schema.sql" download class="clay-btn secondary-btn" style="text-decoration: none; text-align: center;">📜 Download MySQL schema.sql File</a>
+                        </div>
+                    </div>
+
+                    <div class="clay-card form-card">
+                        <div class="form-card-header">
+                            <div class="clay-icon red-icon large">⚠️</div>
+                            <div>
+                                <h2>System Reset Controls</h2>
+                                <p>Perform database reset or clear stored sessions.</p>
+                            </div>
+                        </div>
+                        <div class="form-actions" style="border: none; margin: 0; padding: 0; flex-direction: column; gap: 12px; align-items: stretch;">
+                            <button id="clearSessionsBtn" class="clay-btn secondary-btn">🚪 Clear All Active Sessions</button>
+                            <button id="resetAllDbBtn" class="clay-btn danger-btn danger-clay">🗑️ Reset Database (Factory Restore)</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailModal" class="modal-backdrop hidden">
+        <div class="modal-card clay-card" style="max-width: 550px;">
+            <div class="modal-icon">👤</div>
+            <h3 id="mUserName">Student Details</h3>
+            <p id="mUserEmail" style="color: var(--text-muted); font-size: 0.85rem;"></p>
+            
+            <div class="budget-stats-list" style="margin: 16px 0; text-align: left;">
+                <div class="b-stat">
+                    <span class="b-label">User ID:</span>
+                    <span class="b-value" id="mUserId">-</span>
+                </div>
+                <div class="b-stat">
+                    <span class="b-label">Password:</span>
+                    <span class="b-value" id="mUserPass">-</span>
+                </div>
+                <div class="b-stat">
+                    <span class="b-label">Total Recorded Income:</span>
+                    <span class="b-value green-text" id="mUserInc">₹0.00</span>
+                </div>
+                <div class="b-stat">
+                    <span class="b-label">Total Recorded Expense:</span>
+                    <span class="b-value red-text" id="mUserExp">₹0.00</span>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="clay-btn secondary-btn" onclick="closeAdminModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
